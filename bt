@@ -1,0 +1,90 @@
+import queue
+class BinaryTree:
+	def __init__(self,value):
+		self.value = value
+		self.leftChild = None
+		self.rightChild = None
+
+	def insertLeft(self,value):
+		if (self.leftChild == None):
+			self.leftChild = BinaryTree(value)
+		else:
+			newNode = BinaryTree(value)
+			newNode.leftChild = self.leftChild
+			self.leftChild = newNode
+
+	def insertRight(self,value):
+		if(self.rightChild == None):
+			self.rightChild = BinaryTree(value)
+		else:
+			newNode = BinaryTree(value)
+			newNode.rightChild = self.rightChild
+			self.rightChild = newNode	
+
+	def preOrder(self):
+		print(self.value)
+
+		if self.leftChild:
+			self.leftChild.preOrder()
+
+		if self.rightChild:
+			self.rightChild.preOrder()	
+
+	def inOrder(self):
+		if self.leftChild:
+			self.leftChild.inOrder()
+
+		print(self.value)
+			
+		if self.rightChild:
+			self.rightChild.inOrder()
+
+
+	def postOrder(self):
+		if self.leftChild:
+			self.leftChild.postOrder()
+			
+		if self.rightChild:
+			self.rightChild.postOrder()
+			
+		print(self.value)	
+
+	def bfs(self):
+		q = queue.Queue()
+		q.put(self)
+		while not q.empty():
+			currNode = q.get()
+			print(currNode.value)
+
+			if currNode.leftChild:
+				q.put(currNode.leftChild)
+
+			if currNode.rightChild:
+				q.put(currNode.rightChild)	
+
+
+
+										
+
+
+a_node = BinaryTree('a')
+a_node.insertLeft('b')
+a_node.insertRight('c')
+
+b_node = a_node.leftChild
+b_node.insertRight('d')
+
+c_node = a_node.rightChild
+c_node.insertLeft('e')
+c_node.insertRight('f')
+
+d_node = b_node.rightChild
+e_node = c_node.leftChild
+f_node = c_node.rightChild
+
+print(a_node.value) # a
+print(b_node.value) # b
+print(c_node.value) # c
+print(d_node.value) # d
+print(e_node.value) # e
+print(f_node.value) # f
